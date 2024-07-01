@@ -1,36 +1,36 @@
 'use client'
 
+import CategoryEditSheet from "@/components/category/CategoryEditSheet";
 import DialogConfirmDelete from "@/components/globals/DialogConfirmDelete";
-import PostEditSheet from "@/components/post/PostEditSheet";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import { deletePost, fetchPostById } from "@/services/post.service";
+import { deleteCategory, fetchCategoryById } from "@/services/category.service";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
+import Link from "next/link";
 
-export type PostDetailParams = {
+export type CategoryDetailParams = {
   id: string;
 }
 
-const PostDetail = () => {
-  const { id } = useParams<PostDetailParams>();
+const CategoryDetail = () => {
+  const { id } = useParams<CategoryDetailParams>();
   const router = useRouter();
   const { toast } = useToast()
 
-  const { isPending, error, data } = useQuery({
-    queryKey: ['getPostById', id],
-    queryFn: () => fetchPostById(id)
+  const { isPending, data } = useQuery({
+    queryKey: ['getCategoryById', id],
+    queryFn: () => fetchCategoryById(id)
   })
 
   const mutation = useMutation({
-    mutationFn: deletePost,
+    mutationFn: deleteCategory,
     onSuccess: () => {
       toast({
-        title: 'Post deleted',
-        description: 'Your post has been deleted',
+        title: 'Category deleted',
+        description: 'Your category has been deleted',
       })
-      router.push('/')
+      router.push('/categories')
     }
   });
 
@@ -43,13 +43,12 @@ const PostDetail = () => {
   return ( 
     <div className="p-8 flex flex-col gap-4 items-start">
       <Button variant="link" className="px-0">
-        <Link href="/">Get back to posts list</Link>
+        <Link href="/categories">Get back to categories list</Link>
       </Button>
-      <p className="text-sm text-neutral-300 font-bold uppercase">Post</p>
-      <h1 className="text-4xl font-bold">{data.title}</h1>
-      <p>{data.description}</p>
+      <p className="text-sm text-neutral-300 font-bold uppercase">Category</p>
+      <h1 className="text-4xl font-bold">{data.name}</h1>
       <div className="flex gap-4">
-        <PostEditSheet postName={data.title} postDescription={data.description} />
+        <CategoryEditSheet categoryName={data.name} />
         <DialogConfirmDelete 
           handleDelete={handleDelete} 
           isPending={mutation.isPending}
@@ -59,4 +58,4 @@ const PostDetail = () => {
   );
 }
  
-export default PostDetail;
+export default CategoryDetail;

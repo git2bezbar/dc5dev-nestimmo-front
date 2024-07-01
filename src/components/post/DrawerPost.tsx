@@ -14,6 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import FormPost from "./FormPost";
 import { useState } from "react";
+import AddingButton from "../globals/AddingButton";
 
 const DrawerPost = () => {
     const [open, setOpen] = useState(false);
@@ -21,14 +22,12 @@ const DrawerPost = () => {
     return (
         <Drawer open={open} onOpenChange={setOpen}>
             <DrawerTrigger asChild>
-                <Button variant="default">
-                    Create new post
-                </Button>
+              <AddingButton>Create new post</AddingButton>
             </DrawerTrigger>
             <DrawerContent>
                 <DrawerHeader>
                     <DrawerTitle className="text-center">Ajouter un post</DrawerTitle>
-                    <DrawerDescription className="text-center">Renseignez l'enssemble des champs.</DrawerDescription>
+                    <DrawerDescription className="text-center">Renseignez l&apos;enssemble des champs.</DrawerDescription>
                     <FormPost setOpen={setOpen} />
                 </DrawerHeader>
                 <DrawerFooter>

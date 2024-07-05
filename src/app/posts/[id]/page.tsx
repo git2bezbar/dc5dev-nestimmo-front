@@ -52,7 +52,11 @@ const PostDetail = () => {
       <h1 className="text-4xl font-bold">{data.title}</h1>
       <p>{data.description}</p>
       <div className="flex gap-4">
-        <PostEditSheet postName={data.title} postDescription={data.description} />
+        <PostEditSheet
+          postName={data.title}
+          postDescription={data.description}
+          postCategoryId={data.category.id}
+        />
         <DialogConfirmDelete 
           handleDelete={handleDelete} 
           isPending={mutation.isPending}

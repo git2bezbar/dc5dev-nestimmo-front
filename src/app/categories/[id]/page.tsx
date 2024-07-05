@@ -8,6 +8,7 @@ import { deleteCategory, fetchCategoryById } from "@/services/category.service";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import { fetchPostsByCategory } from "@/services/post.service";
 
 export type CategoryDetailParams = {
   id: string;
@@ -16,12 +17,19 @@ export type CategoryDetailParams = {
 const CategoryDetail = () => {
   const { id } = useParams<CategoryDetailParams>();
   const router = useRouter();
-  const { toast } = useToast()
+  const { toast } = useToast();
 
   const { isPending, data } = useQuery({
     queryKey: ['getCategoryById', id],
     queryFn: () => fetchCategoryById(id)
   })
+
+  const { data: dataByCategory } = useQuery({
+    queryKey: ['getPostsFromCategory', id],
+    queryFn: () => fetchPostsByCategory(id)
+  })
+
+  const hasPosts = dataByCategory?.length > 0;
 
   const mutation = useMutation({
     mutationFn: deleteCategory,
@@ -52,8 +60,13 @@ const CategoryDetail = () => {
         <DialogConfirmDelete 
           handleDelete={handleDelete} 
           isPending={mutation.isPending}
+          isDisabled={hasPosts}
         />
       </div>
+      { 
+        hasPosts &&
+        <p className="text-sm text-neutral-300">You can&apos;t delete a category with posts</p>
+      }
     </div>
   );
 }

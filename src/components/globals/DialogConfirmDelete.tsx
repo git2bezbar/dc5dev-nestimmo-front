@@ -12,13 +12,14 @@ import { Button } from "@/components/ui/button"
 type DialogConfirmDeleteProps = {
     handleDelete: () => void;
     isPending: boolean;
+    isDisabled: boolean;
 }
 
-const DialogConfirmDelete = ({ handleDelete, isPending }: DialogConfirmDeleteProps) => {
+const DialogConfirmDelete = ({ handleDelete, isPending, isDisabled }: DialogConfirmDeleteProps) => {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button variant="destructive">
+                <Button variant="destructive" disabled={isDisabled}>
                     Delete
                 </Button>
             </DialogTrigger>

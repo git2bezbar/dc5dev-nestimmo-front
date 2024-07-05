@@ -7,6 +7,12 @@ export const fetchAllPosts = async () => {
     return data;
 }
 
+export const fetchPostsByCategory = async (categoryId: string) => {
+    const response = await fetch(`${POST_ENDPOINT}?categoryId=${categoryId}`);
+    const data = await response.json();
+    return data;
+}
+
 export const fetchPostById = async (id: string) => {
     const response = await fetch(`${POST_ENDPOINT}/${id}`);
     const data = await response.json();

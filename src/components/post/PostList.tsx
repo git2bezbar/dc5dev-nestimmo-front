@@ -7,7 +7,7 @@ import Link from "next/link";
 import PostSheet from "./PostSheet";
 
 const PostList = () => {
-  const { isPending, error, data } = useQuery({
+  const { isPending, data } = useQuery({
     queryKey: ['getAllPosts'],
     queryFn: fetchAllPosts
   })

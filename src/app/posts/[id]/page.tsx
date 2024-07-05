@@ -46,6 +46,9 @@ const PostDetail = () => {
         <Link href="/">Get back to posts list</Link>
       </Button>
       <p className="text-sm text-neutral-300 font-bold uppercase">Post</p>
+      <p className="text-xs text-white bg-emerald-500 px-3 py-1 rounded-full font-bold">
+        {data.category.name}
+      </p>
       <h1 className="text-4xl font-bold">{data.title}</h1>
       <p>{data.description}</p>
       <div className="flex gap-4">

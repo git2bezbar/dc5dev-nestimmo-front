@@ -25,6 +25,7 @@ const PostList = () => {
             href={`/posts/${post.id}`}
             className="bg-neutral-50 border-2 border-neutral-100 rounded-xl p-8 flex flex-col gap-2 hover:-translate-y-1 hover:bg-neutral-100 duration-300"
           >
+            <p className="text-xs text-white bg-emerald-500 px-3 py-1 rounded-full font-bold self-end">{post.category.name}</p>
             <h3 className="text-xl font-bold">{post.title}</h3>
             <p className="text-sm text-gray-500">
               {

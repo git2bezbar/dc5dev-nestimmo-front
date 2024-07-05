@@ -11,12 +11,12 @@ const Navbar = () => {
       <nav className="flex flex-col gap-2">
         <Link
           href="/"
-          className={`flex gap-2 items-center px-6 py-3 rounded-lg text-sm w-full font-bold ${pathname === '/' ? 'bg-blue-50' : 'duration-300 hover:bg-blue-50'} `}
+          className={`flex gap-2 items-center px-6 py-3 rounded-lg text-sm w-full font-bold ${pathname === '/' || pathname.includes('/posts') ? 'bg-blue-50' : 'duration-300 hover:bg-blue-50'} `}
         >
           <span className="flex w-1.5 h-1.5 rounded-full bg-emerald-500" />
           Posts list
         </Link>
-        <Link href="/categories" className={`flex gap-2 items-center px-6 py-3 rounded-lg text-sm w-full font-bold ${pathname === '/categories' ? 'bg-blue-50' : 'duration-300 hover:bg-blue-50'}`}>
+        <Link href="/categories" className={`flex gap-2 items-center px-6 py-3 rounded-lg text-sm w-full font-bold ${pathname.includes('/categories') ? 'bg-blue-50' : 'duration-300 hover:bg-blue-50'}`}>
           <span className="flex w-1.5 h-1.5 rounded-full bg-blue-500" />
           Categories list
         </Link>

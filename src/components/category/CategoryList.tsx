@@ -25,7 +25,13 @@ const CategoryList = () => {
             href={`/categories/${category.id}`}
             className="bg-neutral-50 border-2 border-neutral-100 rounded-xl p-8 flex flex-col gap-4 hover:-translate-y-1 hover:bg-neutral-100 duration-300"
           >
-            <h3 className="text-xl font-bold">{category.name}</h3>
+            <h3 className="text-xl font-bold">
+              {
+                category.name.length > 25 
+                ? `${category.name.substring(0, 25)}...` 
+                : category.name
+              }
+            </h3>
           </Link>
         ))}
       </div>
